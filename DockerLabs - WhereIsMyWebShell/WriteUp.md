@@ -139,4 +139,4 @@ Una vez dentro, nos dirigimos al directorio "/tmp", ya que en el sitio web nos a
 ## Recursos
 
 - [Documentación oficial de PHP](https://www.php.net/)
-- [Herramientas utilizadas: Nmap, Gobuster, cURL](https://github.com/tools)
+- [Herramientas utilizadas: Nmap, Gobuster...](https://github.com/tools)
