@@ -133,8 +133,8 @@ Una vez dentro, nos dirigimos al directorio "/tmp", ya que en el sitio web nos a
 
 ## Lecciones Aprendidas
 
-- La validación de archivos en los formularios de subida es crucial para evitar la ejecución de web shells.
-- La enumeración de directorios y análisis manual son esenciales en desafíos web.
+- La enumeración de directorios y análisis manual son esenciales en desafíos web. Elegir un buen diccionario es clave para extraer un parámetro, aunque el proceso puede alargarse cuanto más palabras contenga este.
+- Es importante validar y sanitizar los parámetros en PHP a fin de limitar el rango de opciones esperadas, evitando así la ejecución remota de comandos.
 
 ## Recursos
 
