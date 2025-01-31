@@ -2,7 +2,7 @@
 
 ## Información General
 
-- **Nombre del CTF:** DockerLabs
+- **Nombre del CTF:** WhereIsMyWebShell
 - **Categoría:** Explotación web
 - **Dificultad:** Fácil
 - **Fecha:** 23/01/2025
