@@ -4,7 +4,7 @@
 
 - **Nombre del CTF:** DockerLabs
 - **Categoría:** Explotación web
-- **Dificultad:** Media
+- **Dificultad:** Fácil
 - **Fecha:** 23/01/2025
 
 ## Descripción del Desafío
