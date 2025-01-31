@@ -3,7 +3,7 @@
 ## Información General
 
 - **Nombre del CTF:** WhereIsMyWebShell
-- **Categoría:** Explotación web
+- **Categoría:** Boot2Root
 - **Dificultad:** Fácil
 - **Fecha:** 23/01/2025
 
