@@ -3,7 +3,7 @@
 ## Información General
 
 - **Nombre del desafío:** FirstHacking
-- **Categoría:** Explotación de Servicios
+- **Categoría:** Boot2Root
 - **Dificultad:** Muy Fácil
 - **Fecha:** 20/01/2025
 - **Plataforma:** https://dockerlabs.es/
