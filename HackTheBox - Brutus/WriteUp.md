@@ -89,9 +89,9 @@ grep "curl" auth.log
 
 ## Lecciones Aprendidas
 
-- SUID permite que un programa se ejecute con los permisos de su propietario.
-- Puede ser útil para programas legítimos como passwd.
-- También puede ser peligroso si un atacante lo explota para escalar privilegios.
+- **Los ataques de fuerza bruta pueden explotar credenciales débiles.** Si los servicios permiten intentos ilimitados de autenticación, un atacante puede probar listas de contraseñas hasta encontrar la correcta. Implementar protección contra fuerza bruta, como **bloqueo de cuentas tras múltiples intentos fallidos** y uso de **CAPTCHAs**, puede ser una buena defensa contra este tipo de ataques.
+- Conseguir credenciales de un usuario con bajos privilegios puede ser suficiente para escalar dentro de la red.
+- En **`/var/log/auth.log`**, un gran número de intentos fallidos seguidos de diferentes nombres de usuario puede indicar un ataque de fuerza bruta en SSH. Será necesario configurar alertas para detectar patrones sospechosos y bloquear IPs maliciosas con **Fail2Ban** o reglas de firewall.
 
 ## Recursos
 
