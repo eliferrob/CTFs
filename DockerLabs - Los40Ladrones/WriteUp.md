@@ -3,7 +3,7 @@
 ## Información General
 
 - **Nombre del desafío:** Los40Ladrones
-- **Categoría:** Explotación de Servicios
+- **Categoría:** Boot2Root
 - **Dificultad:** Muy Fácil
 - **Fecha:** 21/01/2025
 - **Plataforma:** https://dockerlabs.es/

@@ -3,7 +3,7 @@
 ## Información General
 
 - **Nombre del CTF:** Injection
-- **Categoría:** Explotación web
+- **Categoría:** Boot2Root
 - **Dificultad:** Muy Fácil
 - **Fecha:** 31/01/2025
 
