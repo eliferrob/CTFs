@@ -3,7 +3,7 @@
 ## Información General
 
 - **Nombre del desafío:** Brutus (Sherlock)
-- **Categoría:** Análisis de logs (FDIR)
+- **Categoría:** Análisis de logs (DFIR)
 - **Dificultad:** Muy Fácil
 - **Fecha:** 31/01/2025
 
