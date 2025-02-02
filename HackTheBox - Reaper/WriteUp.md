@@ -94,7 +94,7 @@ En el mismo evento, encontramos la información si descendemos un poco más abaj
 
 ![image](https://github.com/eliferrob/CTFs/blob/main/HackTheBox%20-%20Reaper/assets/image(18).png)
 
-### Task 19
+### Task 10
 
 ![image](https://github.com/eliferrob/CTFs/blob/main/HackTheBox%20-%20Reaper/assets/image(19).png)
 
