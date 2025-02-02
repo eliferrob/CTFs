@@ -98,7 +98,7 @@ En el mismo evento, encontramos la información si descendemos un poco más abaj
 
 ![image](https://github.com/eliferrob/CTFs/blob/main/HackTheBox%20-%20Reaper/assets/image(19).png)
 
-En esta ocasión, filtramos por el ID 5140 (evento de compartición de archivos) y encontramos la ruta.
+En esta ocasión, filtramos por el ID 5140 (acceso a un recurso compartido) y encontramos la ruta.
 
 ![image](https://github.com/eliferrob/CTFs/blob/main/HackTheBox%20-%20Reaper/assets/image(10).png)
 
@@ -113,3 +113,4 @@ En esta ocasión, filtramos por el ID 5140 (evento de compartición de archivos)
 - [Herramienta Wireshark](https://www.wireshark.org/)
 - [Análisis básico de ficheros PCAP](https://fwhibbit.es/analisis-basico-de-ficheros-pcap)
 - [Event ID codes](https://learn.microsoft.com/en-us/previous-versions/tn-archive/dd639428(v=technet.10))
+- [Evento ID 5140](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-5140)
