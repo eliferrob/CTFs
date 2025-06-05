@@ -80,7 +80,7 @@ hydra -l bananaman -P /usr/share/wordlists/rockyou.txt ssh://192.168.10.24
 
 Obtenemos las credenciales de acceso de "bananaman" en la máquina víctima. Accedemos y, al ejecutar el comando `ls` para listar el contenido del directorio en el que nos encontramos, hallamos la **flag del usuario**.
 
-![[dwqdeqewdqwa.png]]
+![image](https://github.com/eliferrob/CTFs/blob/main/The%20Hackers%20Labs%20-%20Fruits/assets/fruits(12).png)
 
 🚩 **Flag de usuario encontrada.**
 
