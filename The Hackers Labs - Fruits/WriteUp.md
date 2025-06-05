@@ -9,8 +9,7 @@
 - **MD5:** 128b77040d5ec9365a158ac0c1bb5021
 - **Enlace:** [The Hackers Lab - Fruits](https://thehackerslabs.com/fruits/)
 
->[!tip] Objetivo
->Obtener las flags: 
+>**Objetivo** > Obtener las flags: 
 > - 🚩 user.txt 
 > - 🚩 root.txt
 
