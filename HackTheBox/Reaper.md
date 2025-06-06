@@ -73,7 +73,7 @@ Filtramos por `llmnr` y buscamos la IP que está respondiendo a las solicitudes 
 
 ![image](https://github.com/eliferrob/CTFs/blob/main/assets/reaper%20(13).png)
 
-1. Abrimos el ficheor `Security.evtx` con el Visor de Eventos de Windows.
+1. Abrimos el fichero `Security.evtx` con el Visor de Eventos de Windows.
 2. Filtramos por el "Event ID 4624" (evento de inicio de sesión).
 3. Buscamos sesiones donde el usuario comprometido (arthur.kyle) inicia sesión.
 4. El `Logon ID` está en los detalles del evento.
