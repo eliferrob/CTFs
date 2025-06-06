@@ -22,7 +22,7 @@ En primer lugar, ejecutaremos el script proporcionado junto con la máquina para
 sudo bash auto_deploy.sh firsthacking.tar
 ```
 
-![image](https://github.com/eliferrob/CTFs/blob/main/DockerLabs%20-%20FirstHacking/assets/DockerLabs%20-%20FirstHacking%20(1).png)
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/FirstHacking%20(1).png)
 
 ### 2. Análisis de vulnerabilidades
 
@@ -36,8 +36,7 @@ nmap -T4 -A -v 172.17.0.2
 - A: Activa la detección de sistema operativo, detección de versiones, escaneo de scripts y traceroute.
 - v: Modo verbose (detallado), proporciona más información durante la ejecución del escaneo.
 
-![image](https://github.com/eliferrob/CTFs/blob/main/DockerLabs%20-%20FirstHacking/assets/DockerLabs%20-%20FirstHacking%20(2).png)
-
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/FirstHacking%20(2).png)
 ### 3. Explotación
 
 Para explotar esta vulnerabilidad, utilizamos el framework Metasploit. Escribimos `msfconsole` en el terminal y realizamos una búsqueda por el servicio `vsftpd`. Encontramos un exploit que podría servirnos para nuestro cometido.
@@ -47,8 +46,7 @@ msfconsole
 search vsftpd
 ```
 
-![image](https://github.com/eliferrob/CTFs/blob/main/DockerLabs%20-%20FirstHacking/assets/DockerLabs%20-%20FirstHacking%20(3).png)
-
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/FirstHacking%20(3).png)
 Seleccionamos el módulo `exploit/unix/vsftpd_234_backdoor` y modificamos los parámetros correspondientes. En este caso, configuramos RHOSTS para que tenga la IP de la máquina vulnerable, esto es, `172.17.0.2`. 
 
 ```bash
@@ -56,8 +54,7 @@ use exploit/unix/ftp/vsftpd_234_backdoor
 set RHOSTS 172.17.0.2
 ```
 
-![image](https://github.com/eliferrob/CTFs/blob/main/DockerLabs%20-%20FirstHacking/assets/DockerLabs%20-%20FirstHacking%20(4).png)
-
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/FirstHacking%20(4).png)
 Finalmente, ejecutamos el exploit con el comando `run`. 
 
 ### 4. Resolución
@@ -70,7 +67,7 @@ whoami
 
 La salida confirma que somos el usuario `root`.
 
-![image](https://github.com/eliferrob/CTFs/blob/main/DockerLabs%20-%20FirstHacking/assets/DockerLabs%20-%20FirstHacking%20(5).png)
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/FirstHacking%20(5).png)
 
 ## Lecciones Aprendidas
 
