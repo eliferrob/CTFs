@@ -10,8 +10,7 @@
 - **MD5:** d3c63284f99639d8a19467f39ee7c57f
 - **Enlace:** [The Hackers Lab - Microchoft](https://thehackerslabs.com/microchoft/)
 
->[!tip] Objetivo
->Obtener las flags: 
+>Objetivo > Obtener las flags: 
 > - 🚩 user.txt 
 > - 🚩 root.txt
 
@@ -22,7 +21,7 @@ IP máquina víctima: **192.168.10.20**
 
 Comprobamos la conectividad enviando un paquete `icmp` a dicha máquina. Además, en función del TTL sabremos distinguir el SO instalado en la misma. Dado que su TTL es 128, estamos frente a una máquina **Windows**.
 
-![[microchoft (1).png]]
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/microchoft%20(1).png)
 
 ### Escaneo de Puertos
 
@@ -30,7 +29,7 @@ Comprobamos la conectividad enviando un paquete `icmp` a dicha máquina. Adem�
 nmap -p- --open -sS -sC -sV --min-rate 5000 -n -vvv -Pn 192.168.10.20
 ```
 
-![[microchoft (2).png]]
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/microchoft%20(2).png)
 
 ### Enumeración de Servicios
 
@@ -59,23 +58,22 @@ run
 
 La explotación ha sido un éxito. Hemos conseguido abrir una sesión de **meterpreter** con el usuario "NT Authority".
 
-![[microchoft (3).png]]
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/microchoft%20(3).png)
 
 Abrimos una shell escribiendo `shell` y comprobamos qué usuarios hay registrados en la máquina víctima.
 
-![[microchoft (4).png]]
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/microchoft%20(4).png)
 
 ## 🔐Escalada de Privilegios
 
 Nos desplazamos a la ruta `C:\Users` y listamos su contenido. Vemos que efectivamente tenemos las carpetas de los usuarios **Admin** y **Lola**, así que indagamos un poco en ellas y encontramos que en el escritorio guardan un fichero con su **flag**.
 
-![[microchoft (5).png]]
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/microchoft%20(5).png)
 
-
-![[microchoft (6).png]]
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/microchoft%20(6).png)
 
 🚩 **Flag de root encontrada.**
 
-![[microchoft (7).png]]
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/microchoft%20(7).png)
 
 🚩 **Flag de user encontrada.**
