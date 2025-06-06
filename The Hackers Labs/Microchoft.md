@@ -56,7 +56,7 @@ set RHOSTS 192.168.10.20
 run
 ```
 
-La explotación ha sido un éxito. Hemos conseguido abrir una sesión de **meterpreter** con el usuario "NT Authority".
+La explotación ha sido un éxito. Hemos conseguido abrir una sesión de **meterpreter** con el usuario "NT Authority\System".
 
 ![image](https://github.com/eliferrob/CTFs/blob/main/assets/microchoft%20(3).png)
 
