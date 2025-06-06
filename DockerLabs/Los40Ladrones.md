@@ -31,11 +31,11 @@ Emplearemos la herramienta Zenmap para ejecutar de forma gráfica un escaneo de 
 nmap -T4 -A -v 172.17.0.2
 ```
 
-![image](https://github.com/eliferrob/CTFs/blob/main/DockerLabs%20-%20Los40Ladrones/assets/DockerLabs%20-%20Los40Ladrones%20(1).png)
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/Los40Ladrones%20(1).png)
 
 Si introducimos la IP en el navegador junto con el puerto, podremos comprobar que, efectivamente, el servicio está activo.
 
-![image](https://github.com/eliferrob/CTFs/blob/main/DockerLabs%20-%20Los40Ladrones/assets/DockerLabs%20-%20Los40Ladrones%20(2).png)
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/Los40Ladrones%20(2).png)
 
 ### 3. Análisis del sitio web
 
@@ -55,11 +55,11 @@ gobuster dir -u http://172.17.0.2 -w /usr/share/wordlists/directory-list-2.3-med
 - `-w`: Define el archivo de lista de palabras que se usará para probar los nombres de directorios y archivos.
 - `-x`: Establece las extensiones de archivo que se deben probar junto con los nombres de los directorios.
 
-![image](https://github.com/eliferrob/CTFs/blob/main/DockerLabs%20-%20Los40Ladrones/assets/DockerLabs%20-%20Los40Ladrones%20(3).png)
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/Los40Ladrones%20(3).png)
 
 Encontramos un fichero de texto con un nombre un tanto peculiar, así que decidimos acceder a él alterando la url. 
 
-![image](https://github.com/eliferrob/CTFs/blob/main/DockerLabs%20-%20Los40Ladrones/assets/DockerLabs%20-%20Los40Ladrones%20(4).png)
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/Los40Ladrones%20(4).png)
 
 En este archivo encontramos un mensaje propone la existencia de un posible usuario en sistema llamado "**toctoc**", así como una secuencia de números que se asemeja a una sucesión de puertos (**7000 8000 9000**). Esta serie de números apunta que la máquina utiliza la técnica *port knocking* para ocultar un puerto. 
 
@@ -79,7 +79,7 @@ knock 172.17.0.2 7000 8000 9000
 - `172.17.0.2`: Es la dirección IP del objetivo al que se están enviando los paquetes.
 - `7000 8000 9000`: Son los números de puerto a los que se envían los paquetes en la secuencia especificada.
 
-![image](https://github.com/eliferrob/CTFs/blob/main/DockerLabs%20-%20Los40Ladrones/assets/DockerLabs%20-%20Los40Ladrones%20(5).png)
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/Los40Ladrones%20(5).png)
 
 Tras esto, si volvemos a realizar un escaneo comprobaremos que se ha abierto el puerto 21 (correspondiente a SSH).
 
@@ -97,25 +97,14 @@ hydra -l toctoc -P /usr/share/wordlists/rockyou.txt.gz ssh://172.17.0.2 -t 64
 - `ssh://172.17.0.2`: Define el protocolo (SSH) y la dirección IP del objetivo (`172.17.0.2`).
 - `-t`: Establece el número de hilos concurrentes en 64, lo que permite realizar el ataque de manera más rápida al probar varias combinaciones de contraseñas en paralelo.
 
-![image](https://github.com/eliferrob/CTFs/blob/main/DockerLabs%20-%20Los40Ladrones/assets/DockerLabs%20-%20Los40Ladrones%20(6).png)
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/Los40Ladrones%20(6).png)
 
 ### 6. Acceso SSH y Escalada de Privilegios
 
 Seguidamente nos conectaremos a la máquina mediante SSH utilizando las credenciales obtenidas.
 
-![image](https://github.com/eliferrob/CTFs/blob/main/DockerLabs%20-%20Los40Ladrones/assets/DockerLabs%20-%20Los40Ladrones%20(7).png)
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/Los40Ladrones%20(7).png)
 
 Finalmente, ejecutamos ```sudo -l``` para ver los comandos que podemos ejecutar a nivel de root, encontrándonos con dos comandos. Realizamos un sudo con uno de ellos y veremos que hemos escalado privilegios.
 
-![image](https://github.com/eliferrob/CTFs/blob/main/DockerLabs%20-%20Los40Ladrones/assets/DockerLabs%20-%20Los40Ladrones%20(8).png)
-
-## Lecciones Aprendidas
-
-- La técnica de "port knocking" puede ocultar servicios críticos; es esencial identificar y probar posibles secuencias.
-- La fuerza bruta puede ser efectiva cuando se dispone de un nombre de usuario válido y una lista de contraseñas adecuada.
-- Revisar los permisos de `sudo` puede revelar oportunidades para la escalada de privilegios.
-
-## Recursos
-
-- [Información sobre la técnica Port Knocking](https://blog.desdelinux.net/port-knocking-la-mejor-seguridad-que-puedes-tener-en-tu-ordenador-o-servidor-implementacion-configuracion/)
-- [Knock - Man page](https://linux.die.net/man/1/knock)
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/Los40Ladrones%20(8).png)
