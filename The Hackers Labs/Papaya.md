@@ -10,8 +10,7 @@
 - **MD5:** 855d57fe8086baf60cce4c69bfbd6ee1
 - **Enlace:** https://thehackerslabs.com/papaya/
 
->[!tip] Objetivo
->Obtener las flags: 
+> Objetivo > Obtener las flags: 
 > - 🚩 user.txt 
 > - 🚩 root.txt
 
@@ -23,7 +22,7 @@ IP máquina víctima: **192.168.10.19**
 
 Comprobamos la conectividad enviando un paquete `icmp` a dicha máquina. Además, en función del TTL sabremos distinguir el SO instalado en la misma. Dado que su TTL es 64, estamos frente a una máquina **Linux**.
 
-![[papaya (1).png]]
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/papaya%20(1).png)
 
 ### Escaneo de Puertos
 
@@ -33,7 +32,7 @@ A continuación, proseguimos con un escaneo de puertos. El resultado revela que 
 nmap -p- --open -sS -sC -sV --min-rate 5000 -n -vvv -Pn 192.168.10.19
 ```
 
-![[papaya (2).png]]
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/papaya%20(2).png)
 
 ### Enumeración de Servicios
 
@@ -49,21 +48,21 @@ nmap -p- --open -sS -sC -sV --min-rate 5000 -n -vvv -Pn 192.168.10.19
 
 Accedemos primero al servicio FTP para analizar el fichero **secret.txt** que tenemos a nuestro alcance. Como el servicio permite el login anónimo, no necesitaremos credenciales para poder iniciar sesión y descargar el fichero.
 
-![[papaya (3).png]]
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/papaya%20(3).png)
 
 El fichero contiene la siguiente cadena:
 
-![[papaya (4).png]]
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/papaya%20(4).png)
 
 A primera vista, no parece ser un hash ni una codificación estándar. De hecho, la inclusión de la letra `ñ` me da a entender que el texto está en español y la estructura del cifrado me recuerda a un cifrado de sustitución, seguramente **Caesar**, así que intento descifrarlo mediante fuerza bruta con una herramienta de internet llamada [DCode](https://www.dcode.fr/cifrado-cesar) y descubro que con 13 desplazamientos aparece un texto que nos indica que no sigamos explorando por aquí. 
 
 Así pues, pasamos a analizar el sitio web.
 
-![[papaya (5).png]]
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/papaya%20(5).png)
 
 ### Reconocimiento Web
 
-![[papaya (6).png]]
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/papaya%20(6).png)
 
 Al escribir la IP de la máquina víctima, nos redirigirá automáticamente al dominio `papaya.thl`. Lo añadimos a `/etc/hosts` para que haga la resolución correctamente y podamos acceder a ella. Escribimos el siguiente comando en la terminal:
 
@@ -90,11 +89,11 @@ Creamos un fichero malicioso llamado `test.php` que tendrá el siguiente conteni
 
 Lo comprimimos ejecutando `zip test.zip test.php` y lo cargamos en el instalador de temas del sitio web.
 
-![[papaya (7).png]]
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/papaya%20(7).png)
 
 Ahora, abrimos el fichero desde el navegador accediendo a la siguiente ruta:
 
-![[papaya (8).png]]
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/papaya%20(8).png)
 
 ## ⚔️ Explotación
 
@@ -108,8 +107,7 @@ Ponemos la máquina atacante en modo escucha con el comando `nc -lvnp 4444` y ac
 
 Visualizamos el fichero `/etc/passwd` y encontramos algunos usuarios, entre ellos el usuario **papaya**.
 
-![[papaya (9).png]]
-
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/papaya%20(9).png)
 
 Listamos algunos directorios y encontramos un fichero en `/opt` llamado **pass.zip**.  Nos movemos al directorio en cuestión y levantamos un servicio web con `python` ejecutando el siguiente comando:
 
@@ -117,30 +115,30 @@ Listamos algunos directorios y encontramos un fichero en `/opt` llamado **pass.z
 python3 -m http.server 8080
 ```
 
-![[papaya (10).png]]
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/papaya%20(10).png)
 
 Desde nuestra máquina atacante, hacemos un `wget` del fichero para descargarlo. Intentamos descomprimirlo, pero parece que tiene una contraseña. Para descifrarla, haremos uso de la herramienta **John The Ripper**. Ejecutamos los siguientes comandos para extraer el hash de la contraseña y hacerle un ataque de fuerza bruta:
 
-![[papaya (11).png]]
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/papaya%20(11).png)
 
-![[papaya (12).png]]
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/papaya%20(12).png)
 
 La contraseña de `pass.zip` es **jesica**. Volvemos a descomprimir el fichero, esta vez con utilizando las credenciales que hemos obtenido y visualizamos el fichero que contiene. Es otra contraseña, seguramente del usuario **papaya**.
 
-![[papaya (13).png]]
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/papaya%20(13).png)
 
 Ahora, iniciaremos sesión con estas credenciales en la máquina víctima mediante el **protocolo SSH**.
 
-![[papaya (14).png]]
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/papaya%20(14).png)
 
 🚩 **Flag de user encontrada.**
 
 ## 🔐Escalada de Privilegios
 
-![[papaya (15).png]]
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/papaya%20(15).png)
 
-![[papaya (16).png]]
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/papaya%20(16).png)
 
-![[papaya (17).png]]
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/papaya%20(17).png)
 
 🚩 **Flag de root encontrada.**
