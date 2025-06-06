@@ -37,7 +37,7 @@ nmap -p- -sS -sC -sV --min-rate 5000 -n -Pn 192.168.100.2
 - `-n`: Desactiva la resolución de nombres DNS, lo que evita que Nmap intente resolver las direcciones IP a nombres de dominio, lo que mejora la velocidad del escaneo.
 - `-Pn`: Desactiva el ping previo al escaneo, lo que significa que Nmap no hará un "ping" para verificar si el host está activo antes de realizar el escaneo de puertos. Esto es útil cuando el objetivo puede estar bloqueando pings o para escanear máquinas sin respuesta a los pings.
 
-![image](https://github.com/eliferrob/CTFs/blob/main/DockerLabs%20-%20Injection/assets/Injection%20(1).png)
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/Injection%20(1).png)
 
 **Resultados del escaneo:**
 
@@ -48,15 +48,15 @@ nmap -p- -sS -sC -sV --min-rate 5000 -n -Pn 192.168.100.2
 
 Accedemos al servidor HTTP mediante el navegador escribiendo `http://192.168.100.2:80` y nos aparecerá una ventana de un login. Introducimos una inyección SQL básica en el campo del usuario, y como el carácter `#` comenta todo lo que se sitúe a la derecha del mismo, no tendrá en cuenta el resto de la query. Escribimos cualquier cosa como contraseña (porque es un campo requerido) y presionamos la tecla Enter.
 
-![image](https://github.com/eliferrob/CTFs/blob/main/DockerLabs%20-%20Injection/assets/Injection%20(2).png)
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/Injection%20(2).png)
 
 Una vez logueados, nos devuelven un mensaje de bienvenida con una contraseña y el nombre de un usuario.
 
-![image](https://github.com/eliferrob/CTFs/blob/main/DockerLabs%20-%20Injection/assets/Injection%20(3).png)
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/Injection%20(3).png)
 
  Dado que también se encuentra abierto el puerto de SSH, probamos a introducir las credenciales que acabamos de obtener.
 
-![image](https://github.com/eliferrob/CTFs/blob/main/DockerLabs%20-%20Injection/assets/Injection%20(4).png)
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/Injection%20(4).png)
 
 ### 4. Escalada de Privilegios
 
@@ -91,18 +91,6 @@ Hay uno de ellos que nos llama especialmente la atención, y es el fichero `/usr
 
 Normalmente, cuando ejecutas una shell con `sudo` o con `setuid`, ciertos privilegios pueden reducirse por seguridad. Con `sh -p`, esos privilegios NO se reducen, lo que puede permitirte escalar privilegios a `root`.
 
-![image](https://github.com/eliferrob/CTFs/blob/main/DockerLabs%20-%20Injection/assets/Injection%20(5).png)
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/Injection%20(5).png)
 
 ¡Estamos dentro!
-
-## Lecciones Aprendidas
-
-- SUID permite que un programa se ejecute con los permisos de su propietario.
-- Puede ser útil para programas legítimos como passwd.
-- También puede ser peligroso si un atacante lo explota para escalar privilegios.
-
-## Recursos
-
-- [Documentación oficial de Nmap](https://nmap.org/man/es/index.html)
-- [SetUID, SetGID, and Sticky Bits in Linux File Permissions](https://www.geeksforgeeks.org/setuid-setgid-and-sticky-bits-in-linux-file-permissions/)
-- [Linux File Permissions: Understanding setuid, setgid, and the Sticky Bit](https://www.cbtnuggets.com/blog/technology/system-admin/linux-file-permissions-understanding-setuid-setgid-and-the-sticky-bit)
